@@ -1,0 +1,29 @@
+<button onclick="history.back()" type="button" style="margin-left: 5%; margin-top: -3%" mat-flat-button class="accent-button">
+  Назад
+</button>
+
+<div style="max-width: 800px; margin: 20px auto;">
+  <h1 style="text-align: center; color: #6b0e4b">Повідомлення від користувачів</h1>
+  <div *ngIf="message$ | async as messages; else loader">
+    <div *ngFor="let message of messages">
+      <div class="container">
+        <div class="title">
+          <h3>{{ message.user?.username }}</h3>
+          <div class="date">
+            <p>{{ message.date | date : 'dd.MM.yyyy' }}</p>
+            <p>{{ message.date | date : 'HH:mm' }}</p>
+          </div>
+        </div>
+        <span></span>
+        <p>{{ message.text }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty" style="text-align: center; padding-top: 20px ">Повідомлень поки немає</div>
+</ng-template>
+<ng-template #loader>
+  <mat-spinner color="accent" style="margin: auto"></mat-spinner>
+</ng-template>

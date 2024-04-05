@@ -1,0 +1,54 @@
+<form class="auth-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h1 class="title">Реєстрація</h1>
+  <span
+    class="helper-text red-text"
+    *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
+  >
+      <span *ngIf="form.get('username')?.errors?.['required']">Ім'я не може бути порожнім</span>
+<span *ngIf="form.get('username')?.errors?.['minlength']"> Ім'я має бути більше {{form.get('username')?.errors?.['minlength']['requiredLength'] }} символів.</span>
+<span *ngIf="form.get('username')?.errors?.['maxlength']"> Ім'я має бути менше {{form.get('username')?.errors?.['maxlength']['requiredLength'] }} символів.</span>
+      <span *ngIf="form.get('username')?.errors?.['pattern']">Ім'я може складатися лише з букв, або цифр</span>
+    </span>
+  <mat-form-field>
+    <mat-label>Ім'я</mat-label>
+    <input matInput
+           id="username"
+           type="name"
+           formControlName="username">
+  </mat-form-field>
+  <span
+    class="helper-text red-text"
+    *ngIf="form.get('email')?.invalid && form.get('email')?.touched"
+  >
+      <span *ngIf="form.get('email')?.errors?.['required']">Email не може бути порожнім</span>
+      <span *ngIf="form.get('email')?.errors?.['email']">Введіть коректну email адресу</span>
+    </span>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput
+           id="email"
+           type="email"
+           formControlName="email">
+  </mat-form-field>
+
+  <span
+    class="helper-text red-text"
+    *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+  >
+      <span *ngIf="form.get('password')?.errors?.['required']">Пароль не може бути порожнім</span>
+      <span *ngIf="form.get('password')?.errors?.['minlength']"> Пароль має бути більше {{form.get('password')?.errors?.['minlength']['requiredLength'] }} символів. Зараз {{ form.get('password')?.errors?.['minlength']['actualLength'] }}</span>
+    </span>
+  <mat-form-field>
+    <mat-label>Пароль</mat-label>
+    <input matInput
+           type="password"
+           id="password"
+           formControlName="password">
+  </mat-form-field>
+  <div class="buttons">
+    <button type="submit" class="accent-button" mat-flat-button [disabled]="form.invalid || form.disabled ">Зареєструватися</button>
+  </div>
+  <a class="out"
+    routerLink="/login"
+  >Повернутися до сторінки авторизації</a>
+</form>

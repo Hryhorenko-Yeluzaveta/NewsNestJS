@@ -1,0 +1,22 @@
+
+<button
+  class="exit-button accent-button"
+  mat-flat-button
+   (click)="logout($event)"
+>
+  Выйти</button>
+
+<div class="mat-buttons ">
+<div class="mat-button-search">
+  <button mat-mini-fab type="button" class="accent-button"  routerLink="search">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
+  <div class="mat-button-create">
+    <button mat-mini-fab type="button" class="accent-button" routerLink="form">
+      <mat-icon>create</mat-icon>
+    </button>
+  </div>
+</div>
+
+<router-outlet></router-outlet>

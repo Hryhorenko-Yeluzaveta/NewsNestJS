@@ -1,0 +1,104 @@
+<button onclick="history.back()" type="button" style="margin-left: 5%; margin-top: -3%" mat-flat-button class="accent-button">Назад</button>
+<div class="container">
+  <div class="header">
+    <h1>Це сторінка пошуку новин</h1>
+    <button mat-fab class="filter-button accent-button" matTooltip="Фільтр категорій" (click)="openFilter=true">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+  </div>
+
+
+  <form class="example-form" (ngSubmit)="OnSubmit()" [formGroup]="form">
+    <mat-form-field class="search" style="width: 100%; margin-top: 12px">
+      <mat-label>Назва новини</mat-label>
+      <input type="text"
+             placeholder="Почніть вводити назву"
+             matInput
+             formControlName="newsName"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (option of filteredOptions | async; track option) {
+          <mat-option [value]="option">{{option}}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+    <button type="submit" mat-flat-button class="accent-button">Пошук</button>
+  </form>
+
+
+  <div class="Categories" *ngIf="openFilter">
+    <div *ngIf="categories$ | async as categories; else loader">
+      <mat-radio-group aria-label="Categories Selection">
+        <mat-radio-button *ngFor="let category of categories" [value]="category.id" (click)="loadNews(category.id); toLoad = true">
+          {{ category.name }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+</div>
+<div class="OneNews" *ngIf="oneNew && !errorOccurred">
+  <div *ngIf="oneNews$ | async as news; else loader">
+      <mat-card class="category-news-card">
+        <mat-card-header>
+          <a
+            class="category-link"
+            mat-card-title
+            [routerLink]="['/news', news.id]"
+          >{{ news.name }}</a>
+        </mat-card-header>
+        <img mat-card-image [src]="getFullImageUrl(news.imageSrc)" alt="Photo of category">
+        <mat-card-content class="my-content">
+          <p>
+            {{ news.text }}
+          </p>
+          <p>
+            Дата створення: {{ news.date | date: 'dd.MM.yyyy' }}
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions class="card-actions">
+          <button class="center" mat-flat-button color="basic" [routerLink]="['/news', news.id]">Детальніше</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="News" *ngIf="toLoad">
+    <div *ngIf="newsByCategory$ | async as newses; else loader">
+      <div *ngIf="newses.length !== 0; else empty">
+      <mat-card class="category-news-card" *ngFor="let news of newses">
+        <mat-card-header>
+          <a
+            class="category-link"
+            mat-card-title
+            [routerLink]="['/news', news.id]"
+          >{{ news.name }}</a>
+        </mat-card-header>
+        <img mat-card-image [src]="getFullImageUrl(news.imageSrc)" alt="Photo of category">
+        <mat-card-content class="my-content">
+          <p>
+            {{ news.text }}
+          </p>
+          <p>
+            Дата створення: {{ news.date | date: 'dd.MM.yyyy' }}
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions class="card-actions">
+          <button class="center" mat-flat-button color="basic" [routerLink]="['/news', news.id]">Детальніше</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  </div>
+<ng-template #loader>
+  <mat-spinner color="accent" style="margin: auto"></mat-spinner>
+</ng-template>
+<ng-template #empty>
+  <div class="empty-message">
+    <p>У цій категорії поки немає новин</p>
+  </div>
+</ng-template>
+
+<div class="empty-message" *ngIf="errorOccurred">
+  <p>Новини з таким ім'ям не існує</p>
+</div>

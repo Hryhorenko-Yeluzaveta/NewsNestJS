@@ -1,0 +1,20 @@
+.exit-button {
+  margin-top: 3%;
+  margin-left: 90%;
+}
+.mat-buttons {
+  display: flex;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+.mat-button-create {
+  padding-left: 10px;
+}
+
+.accent-button {
+  color: #fff;
+  background-color: rgba(23, 1, 126, 0.78);
+}
+

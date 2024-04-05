@@ -1,0 +1,112 @@
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #e3d6ff;
+  background-color: #fff4fc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+h1 {
+  color: #0c0149;
+  margin: 0;
+}
+
+.author {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.date {
+  font-size: 0.8em;
+  color: #0c0149;
+  margin: 5px 0;
+}
+
+.news-text {
+  line-height: 1.5;
+}
+
+.news-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: -5px 0 0 0;
+  padding: 0;
+}
+.comment-form {
+  margin-top: 20px;
+  min-width: 800px;
+}
+.full-width {
+  width: 100%;
+}
+
+
+.comments {
+  margin-top: 20px;
+}
+
+.comments h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.all-comments {
+  margin-left: 20px;
+}
+
+.all-comments h5 {
+  font-size: 18px;
+  color: #0c0149;
+  margin-bottom: 5px;
+}
+
+.all-comments p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.comment-form {
+  margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-width {
+  margin-bottom: 20px;
+}
+
+.comment {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.accent-button {
+  color: #fff;
+  background-color: rgba(51, 26, 162, 0.61);
+}
+p
+{
+  font-size: 20px;
+}

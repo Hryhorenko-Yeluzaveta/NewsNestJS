@@ -1,0 +1,28 @@
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #e3d6ff;
+  background-color: #fff4fc;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+h1, h3 {
+  margin: auto;
+  padding: 10px;
+  color: #0c0149;
+}
+.feedback-form {
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+.accent-button {
+  color: #fff;
+  background-color: rgba(51, 26, 162, 0.61);
+}

@@ -1,0 +1,89 @@
+<button mat-flat-button
+        class="accent-button"
+        style="margin-top: -3%; margin-bottom: 1%; margin-left: 5%"
+        (click)="activeCard=true"
+>Створити категорію
+</button>
+<button mat-flat-button
+       class="accent-button"
+        style="margin-top: -3%; margin-bottom: 1%; margin-left: 2%"
+        routerLink="/messages"
+>Переглянути повідомлення користувачів
+</button>
+<form *ngIf="activeCard" style="margin-left: 5%; margin-right: 70%" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <h2>Створення категорії</h2>
+  <mat-form-field>
+    <mat-label>Назва</mat-label>
+    <input matInput
+           id="name"
+           type="name"
+           formControlName="name">
+  </mat-form-field>
+  <div class="buttons">
+    <button mat-button (click)="activeCard=false">Скасувати</button>
+    <button mat-button type="submit" [disabled]="form.invalid || form.disabled">Зберегти</button>
+  </div>
+</form>
+
+<h1>Категорії новин</h1>
+<div class="container" *ngIf="categories$ | async as categories; else loader">
+  <div *ngFor="let category of categories">
+    <a
+      class="category-link"
+      mat-card-title
+      [routerLink]="['/categories', category.id]"
+    >{{ category.name }}</a>
+    <div *ngIf="category.news.length !== 0; else empty">
+      <mat-card class="category-card" *ngFor="let news of category.news">
+        <mat-card-header>
+          <a
+            class="category-link news-link"
+            mat-card-title
+            [routerLink]="['/news', news.id]"
+          >{{ news.name }}</a>
+        </mat-card-header>
+        <img mat-card-image [src]="getFullImageUrl(news.imageSrc)" alt="Photo of news">
+        <mat-card-content class="my-content">
+          <p>
+            {{ news.text }}
+          </p>
+          <p>
+            Дата створення: {{ news.date | date: 'dd.MM.yyyy ' }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+          <button class="center" mat-button [routerLink]="['/news', news.id]">Детальніше</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="paginator">
+    <div class="Previous" *ngIf="page > 1">
+    <button
+      mat-flat-button
+
+      (click)="loadPreviousCategories()"
+      class="btn waves-effect grey darken-1 btn-small accent-button"
+      *ngIf="!loading; else loader"
+    >
+      Попередня сторінка
+    </button>
+  </div>
+    <div class="Next" *ngIf="categories.length == 3">
+    <button
+      mat-flat-button
+      (click)="loadNextCategories()"
+      class="btn waves-effect grey darken-1 btn-small accent-button"
+      *ngIf="!loading; else loader"
+    >
+      Наступна сторінка
+    </button>
+    </div>
+  </div>
+</div>
+<ng-template #empty>
+  <div class="empty" style="text-align: center; padding-top: 20px ">У цій категорії поки немає новин</div>
+</ng-template>
+<ng-template #loader>
+  <mat-spinner color="basic" style="margin: auto"></mat-spinner>
+</ng-template>

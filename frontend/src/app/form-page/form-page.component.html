@@ -1,0 +1,14 @@
+<button onclick="history.back()" type="button" style="margin-left: 5%; margin-top: -3%" mat-flat-button class="accent-button">Назад</button>
+<div class="container">
+    <h1>Це форма зворотнього зв'язку</h1>
+    <h3>Напишіть своє повідомлення тут:</h3>
+  <form class="feedback-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <mat-label class="text">Повідомлення</mat-label>
+      <textarea matInput
+                id="text"
+                formControlName="text"></textarea>
+    </mat-form-field>
+    <button [disabled]="form.invalid || form.disabled" type="submit" mat-flat-button class="accent-button">Відправити</button>
+  </form>
+</div>

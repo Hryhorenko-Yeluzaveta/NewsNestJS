@@ -1,0 +1,20 @@
+<button onclick="history.back()" type="button" style="margin-left: 5%; margin-top: -3%" mat-flat-button class="accent-button">Назад</button>
+<div class="author-page">
+  <div class="container" *ngIf="news$ | async as newses; else loader">
+    <h3>Усі новини від автора</h3>
+    <div *ngFor="let news of newses" class="news-item">
+      <div class="header">
+        <a class="news-title" [routerLink]="['/news', news.id]">{{ news.name }}</a>
+        <div class="dates">
+          <p class="date">{{ news.date | date : 'HH:mm ' }}</p>
+          <p class="date">{{ news.date | date : 'dd.MM.yyyy' }}</p>
+        </div>
+      </div>
+      <img class="news-image" [src]="getFullImageUrl(news.imageSrc)">
+      <p class="news-text">{{ news.text }}</p>
+    </div>
+  </div>
+</div>
+<ng-template #loader>
+  <mat-spinner color="basic" style="margin: auto"></mat-spinner>
+</ng-template>
